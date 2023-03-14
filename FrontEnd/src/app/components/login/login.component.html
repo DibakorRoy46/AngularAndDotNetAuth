@@ -1,0 +1,98 @@
+<section class="flex flex-col md:flex-row
+h-screen items-center justify-center  bg-[url('/assets/img/login_bg.jpg')] bg-cover
+bg-center bg-no-repeat">
+  <div class="bg-white h-5/6 max-2xl:w-1/3 max-lg:w-2/5 max-md:w-2/4 max-sm:w-2/3 flex justify-center
+  bg-gradient-to-r from-white rounded-md">
+    <div class="w-full h-100 my-4 mx-5">
+      <h1 class="text-xl text-center md:text-2xl font-bold leading-tight ">
+        Log in to your account
+      </h1>
+      <form class="mt-6" action="#" method="POST">
+        <div>
+          <label class="block ">Your Email</label>
+          <input type="email" name=""
+          id="" placeholder="name@company.com"
+          class="w-full px-4 py-2 rounded-lg  mt-2 border focus:border-blue-500
+           focus:bg-white focus:outline-none" autofocus autocomplete >
+        </div>
+
+        <div class="mt-2">
+          <label class="block ">Password</label>
+          <input [type]="type" name="" id="" placeholder="••••••••"
+          class="w-full px-4 py-2 rounded-lg  mt-2 border
+         focus:border-blue-500
+         focus:bg-white focus:outline-none" >
+         <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute mt-5 -ml-5"></span>
+        </div>
+
+        <div class="text-right mt-2 flex justify-between">
+          <div class="flex">
+            <input type="checkbox" name="" id="checkbox"
+            class="text-gray-200 w-4   rounded-lg   border
+           focus:border-blue-500
+           focus:bg-white focus:outline-none" >
+           <label for="checkbox" class="block ml-2  text-sm ">Remember Me</label>
+          </div>
+
+          <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-700
+           focus:text-blue-700">
+              Forgot Password?
+          </a>
+        </div>
+
+        <button type="submit" class="w-full block bg-blue-500 hover:bg-blue-400
+         focus:bg-blue-400 text-white font-semibold rounded-lg px-2 py-2  mt-6">
+              Log in to your account
+        </button>
+      </form>
+
+      <button type="button"
+        class="mt-3 w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-2 py-2 border border-gray-300">
+        <div class="flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-6 h-6"
+            viewBox="0 0 48 48">
+            <defs>
+              <path id="a"
+                d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />
+            </defs>
+            <clipPath id="b">
+              <use xlink:href="#a" overflow="visible" />
+            </clipPath>
+            <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+            <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
+            <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
+            <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
+          </svg>
+          <span class="ml-4">
+            Log in
+            with
+            Google
+          </span>
+        </div>
+      </button>
+
+      <button type="button"
+        class="mt-3 w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-2 py-2 border border-gray-300">
+        <div class="flex items-center justify-center">
+          <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M48 24C48 10.7438 37.2562 0 24 0C10.7438 0 0 10.7438 0 24C0 35.9813 8.775 45.9094 20.25 47.7094V30.9375H14.1562V24H20.25V18.7125C20.25 12.6984 23.8313 9.375 29.3156 9.375C31.9406 9.375 34.6875 9.84375 34.6875 9.84375V15.75H31.6594C28.6781 15.75 27.75 17.6016 27.75 19.5V24H34.4062L33.3422 30.9375H27.75V47.7094C39.225 45.9094 48 35.9813 48 24Z" fill="#1877F2"/>
+            <path d="M33.3422 30.9375L34.4062 24H27.75V19.5C27.75 17.6016 28.6781 15.75 31.6594 15.75H34.6875V9.84375C34.6875 9.84375 31.9406 9.375 29.3156 9.375C23.8313 9.375 20.25 12.6984 20.25 18.7125V24H14.1562V30.9375H20.25V47.7094C21.4734 47.9016 22.725 48 24 48C25.275 48 26.5266 47.9016 27.75 47.7094V30.9375H33.3422Z" fill="white"/>
+          </svg>
+          <span class="ml-4">
+            Log in
+            with
+            Facebook
+          </span>
+        </div>
+      </button>
+
+
+      <p class="mt-8 text-center">
+        <a routerLink="/register" class="text-blue-500 hover:text-blue-700 font-semibold">
+          Don't have a account?
+        </a>
+      </p>
+
+    </div>
+  </div>
+</section>
