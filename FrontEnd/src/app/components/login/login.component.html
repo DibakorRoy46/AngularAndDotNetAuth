@@ -7,22 +7,26 @@ bg-center bg-no-repeat">
       <h1 class="text-xl text-center md:text-2xl font-bold leading-tight ">
         Log in to your account
       </h1>
-      <form class="mt-6" action="#" method="POST">
+      <form class="mt-6" [formGroup]="loginForm">
         <div>
           <label class="block ">Your Email</label>
-          <input type="email" name=""
-          id="" placeholder="name@company.com"
+          <input  formControlName="username"  placeholder="name@company.com"
           class="w-full px-4 py-2 rounded-lg  mt-2 border focus:border-blue-500
-           focus:bg-white focus:outline-none" autofocus autocomplete >
+           focus:bg-white focus:outline-none"  >
+           <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-red-600">Username is required</small>
         </div>
 
         <div class="mt-2">
           <label class="block ">Password</label>
-          <input [type]="type" name="" id="" placeholder="••••••••"
+          <input [type]="type"  formControlName="password" placeholder="••••••••"
           class="w-full px-4 py-2 rounded-lg  mt-2 border
          focus:border-blue-500
          focus:bg-white focus:outline-none" >
          <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute mt-5 -ml-5"></span>
+        <small *ngIf="loginForm.controls['password'].dirty &&
+              loginForm.hasError('required','password')" class="text-red-600">
+              Password is required
+        </small>
         </div>
 
         <div class="text-right mt-2 flex justify-between">
@@ -33,7 +37,7 @@ bg-center bg-no-repeat">
            focus:bg-white focus:outline-none" >
            <label for="checkbox" class="block ml-2  text-sm ">Remember Me</label>
           </div>
-
+g
           <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-700
            focus:text-blue-700">
               Forgot Password?
