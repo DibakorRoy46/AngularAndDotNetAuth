@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   isTextCon:boolean=false;
   eyeIcon:string="fa-eye-slash";
   eyeIconCon:string="fa-eye-slash";
-
+  isAgree:boolean=true;
   registerForm:FormGroup=new FormGroup({});
 
   constructor() { }
@@ -57,18 +57,63 @@ export class RegisterComponent implements OnInit {
     this.isTextCon? this.typeCon="text":this.typeCon="password";
   }
   register(){
-    console.log(this.registerForm?.value);
+    if(this.registerForm.valid){
+      console.log(this.registerForm.value);
+    }
+    else{
+      this.validateAllFormFields(this.registerForm);
+    }
   }
 
-  getClassName(input:string):any{
-    var returnType= "registerForm.get('"+input+"')?.errors"+
-      "&& (registerForm.get('"+input+"')?.touched ||"+
-    "registerForm.get('"+input+"')?.dirty)?"+
-    "'input-form is-invalid  ' :"+
-    "(registerForm.get('"+input+"')?.touched ||"+
-    "registerForm.get('"+input+"')?.dirty) ?"+
-    "' input-form is-valid border-green-600':"+
-    "'input-form'";
-    return returnType;
+  private validateAllFormFields(formGroup:FormGroup){
+    Object.keys(formGroup.controls).forEach(field=>{
+      const control=formGroup.get(field);
+      if(control instanceof FormControl){
+        control.markAsDirty({onlySelf:true});
+      }
+      else if(control instanceof FormGroup){
+        this.validateAllFormFields(control);
+      }
+    })
+    if(this.registerForm.controls['terms'].errors){
+      this.isAgree=false;
+    }
+  }
+  inputValidation(controlName: string):string{
+      return (this.registerForm.controls[controlName].errors &&
+             (this.registerForm.controls[controlName].touched ||
+              this.registerForm.controls[controlName].dirty)
+              ?'input-form is-invalid':
+              (this.registerForm.controls[controlName].touched ||
+              this.registerForm.controls[controlName].dirty)
+              ?'input-form is-valid border-green-600':'input-form');
+  }
+
+  getError(controlName: string): string {
+    const control = this.registerForm.controls[controlName];
+    for (const errorName in control.errors) {
+      if (control.errors.hasOwnProperty(errorName) && control.touched) {
+        return this.getErrorMessage(errorName, control.errors[errorName],controlName);
+      }
+    }
+    return '';
+  }
+  getErrorMessage(errorName: string, errorValue: any,controlName:string): string {
+    switch (errorName) {
+      case 'required':
+        return `This ${controlName} is required`;
+      case 'minlength':
+        return `This ${controlName} should be at least ${errorValue.requiredLength} characters long`;
+      case 'maxlength':
+        return `This ${controlName} should be at less than or equal to ${errorValue.requiredLength} characters long`;
+      case 'email':
+        return 'Invalid email format';
+      case 'isMatching':
+        return 'Password and Confirm Password must be matched';
+      case 'requiredtrue':
+        return 'This ${controlName} is required';
+      default:
+        return '';
+    }
   }
 }

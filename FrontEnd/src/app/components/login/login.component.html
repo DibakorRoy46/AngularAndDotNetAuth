@@ -7,46 +7,41 @@ bg-center bg-no-repeat">
       <h1 class="text-xl text-center md:text-2xl font-bold leading-tight ">
         Log in to your account
       </h1>
-      <form class="mt-6" [formGroup]="loginForm">
+      <form class="mt-6" [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
           <label class="block ">Your Email</label>
-          <input  formControlName="username"  placeholder="name@company.com"
-          class="w-full px-4 py-2 rounded-lg  mt-2 border focus:border-blue-500
-           focus:bg-white focus:outline-none"  >
-           <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-red-600">Username is required</small>
+          <input formControlName="username" [className]="inputValidation('username')" placeholder="name@company.com">
+          <p class="text-red-600" *ngIf="getError('username') !== null">
+            {{getError('username')}}
+          </p>
         </div>
 
         <div class="mt-2">
           <label class="block ">Password</label>
-          <input [type]="type"  formControlName="password" placeholder="••••••••"
-          class="w-full px-4 py-2 rounded-lg  mt-2 border
-         focus:border-blue-500
-         focus:bg-white focus:outline-none" >
-         <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute mt-5 -ml-5"></span>
-        <small *ngIf="loginForm.controls['password'].dirty &&
-              loginForm.hasError('required','password')" class="text-red-600">
-              Password is required
-        </small>
+          <input [type]="type" [className]="inputValidation('password')" formControlName="password"
+            placeholder="••••••••">
+          <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute -mt-[1.75rem] ml-[21.75rem]"></span>
+          <p class="text-red-600" *ngIf="getError('password') !== null">
+            {{getError('password')}}
+          </p>
         </div>
 
         <div class="text-right mt-2 flex justify-between">
           <div class="flex">
-            <input type="checkbox" name="" id="checkbox"
-            class="text-gray-200 w-4   rounded-lg   border
+            <input type="checkbox" name="" id="checkbox" class="text-gray-200 w-4   rounded-lg   border
            focus:border-blue-500
-           focus:bg-white focus:outline-none" >
-           <label for="checkbox" class="block ml-2  text-sm ">Remember Me</label>
+           focus:bg-white focus:outline-none">
+            <label for="checkbox" class="block ml-2  text-sm ">Remember Me</label>
           </div>
-g
           <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-700
            focus:text-blue-700">
-              Forgot Password?
+            Forgot Password?
           </a>
         </div>
 
         <button type="submit" class="w-full block bg-blue-500 hover:bg-blue-400
          focus:bg-blue-400 text-white font-semibold rounded-lg px-2 py-2  mt-6">
-              Log in to your account
+          Log in to your account
         </button>
       </form>
 
@@ -79,8 +74,12 @@ g
         class="mt-3 w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-2 py-2 border border-gray-300">
         <div class="flex items-center justify-center">
           <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M48 24C48 10.7438 37.2562 0 24 0C10.7438 0 0 10.7438 0 24C0 35.9813 8.775 45.9094 20.25 47.7094V30.9375H14.1562V24H20.25V18.7125C20.25 12.6984 23.8313 9.375 29.3156 9.375C31.9406 9.375 34.6875 9.84375 34.6875 9.84375V15.75H31.6594C28.6781 15.75 27.75 17.6016 27.75 19.5V24H34.4062L33.3422 30.9375H27.75V47.7094C39.225 45.9094 48 35.9813 48 24Z" fill="#1877F2"/>
-            <path d="M33.3422 30.9375L34.4062 24H27.75V19.5C27.75 17.6016 28.6781 15.75 31.6594 15.75H34.6875V9.84375C34.6875 9.84375 31.9406 9.375 29.3156 9.375C23.8313 9.375 20.25 12.6984 20.25 18.7125V24H14.1562V30.9375H20.25V47.7094C21.4734 47.9016 22.725 48 24 48C25.275 48 26.5266 47.9016 27.75 47.7094V30.9375H33.3422Z" fill="white"/>
+            <path
+              d="M48 24C48 10.7438 37.2562 0 24 0C10.7438 0 0 10.7438 0 24C0 35.9813 8.775 45.9094 20.25 47.7094V30.9375H14.1562V24H20.25V18.7125C20.25 12.6984 23.8313 9.375 29.3156 9.375C31.9406 9.375 34.6875 9.84375 34.6875 9.84375V15.75H31.6594C28.6781 15.75 27.75 17.6016 27.75 19.5V24H34.4062L33.3422 30.9375H27.75V47.7094C39.225 45.9094 48 35.9813 48 24Z"
+              fill="#1877F2" />
+            <path
+              d="M33.3422 30.9375L34.4062 24H27.75V19.5C27.75 17.6016 28.6781 15.75 31.6594 15.75H34.6875V9.84375C34.6875 9.84375 31.9406 9.375 29.3156 9.375C23.8313 9.375 20.25 12.6984 20.25 18.7125V24H14.1562V30.9375H20.25V47.7094C21.4734 47.9016 22.725 48 24 48C25.275 48 26.5266 47.9016 27.75 47.7094V30.9375H33.3422Z"
+              fill="white" />
           </svg>
           <span class="ml-4">
             Log in

@@ -13,61 +13,60 @@ bg-center bg-no-repeat">
 
         <form class="space-y-4 md:space-y-6 grid  md:grid-cols-2 md:gap-2 "
              autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
-          <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900">
-              Full Name
-            </label>
-            <input type="text" formControlName="fullName"
-             [className]="getClassName('fullName') | stringToExpression:{registerForm:registerForm}"
-              placeholder="John Smith">
 
-              <small class="text-red-600" *ngIf=" registerForm.get('fullName')?.errors
-              && registerForm.get('fullName')?.touched">Please Enter Your Full Name</small>
-          </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Full Name
+              </label>
+              <input type="text" formControlName="fullName" [className]="inputValidation('fullName')" placeholder="John Smith">
+              <p class="text-red-600" *ngIf="getError('fullName') !== null">
+                {{getError('fullName')}}
+              </p>
+            </div>
 
-          <div class="!m-0">
-            <label class="block mb-2 text-sm font-medium text-gray-900">
-              Email
-            </label>
-            <input type="email" formControlName="email"
-            [className]="getClassName('email') | stringToExpression" autocomplete="false"
-              placeholder="name@company.com">
-              <small class="text-red-600" *ngIf=" registerForm.get('email')?.errors
-              && registerForm.get('email')?.touched ">Please Enter Your Full Name</small>
-          </div>
+            <div class="!m-0">
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Email
+              </label>
+              <input type="email" formControlName="email" [className]="inputValidation('email')" placeholder="name@company.com">
+              <p class="text-red-600" *ngIf="getError('email') !== null">
+                {{getError('email')}}
+              </p>
+            </div>
 
-          <div class="!m-1">
-            <label  class="block mb-2 text-sm font-medium text-gray-900 ">
-              Password
-            </label>
-            <input [type]="type" placeholder="••••••••" formControlName="password"
-            [className]="getClassName('password') | stringToExpression">
-            <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute -mt-7 ml-[17rem]"></span>
-            <small class="text-red-600" *ngIf=" registerForm.get('password')?.errors
-            && registerForm.get('password')?.touched ">Please Enter Your Full Name</small>
-          </div>
+            <div class="!m-1">
+              <label class="block mb-2 text-sm font-medium text-gray-900 ">
+                Password
+              </label>
+              <input [type]="type" placeholder="••••••••" formControlName="password" [className]="inputValidation('password')">
+              <span (click)="hideShowPass()" class="fa {{eyeIcon}} cursor-pointer absolute -mt-7 ml-[17rem]"></span>
+              <p class="text-red-600" *ngIf="getError('password') !== null">
+                {{getError('password')}}
+              </p>
+            </div>
 
-          <div class="!m-1">
-            <label  class="block mb-2 text-sm font-medium text-gray-900">
-              Confirm Password
-            </label>
-            <input [type]="typeCon" formControlName="confirmPassword"  placeholder="••••••••"
-            [className]="getClassName('confirmPassword') | stringToExpression">
-            <span (click)="hideShowPassCon()" class="fa {{eyeIconCon}} cursor-pointer absolute -mt-7 ml-[17rem]"></span>
-            <small class="text-red-600" *ngIf=" registerForm.get('confirmPassword')?.errors
-            && registerForm.get('confirmPassword')?.touched ">Please Enter Your Full Name</small>
-          </div>
+            <div class="!m-1">
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Confirm Password
+              </label>
+              <input [type]="typeCon" formControlName="confirmPassword" placeholder="••••••••"
+                [className]="inputValidation('confirmPassword')">
+              <span (click)="hideShowPassCon()" class="fa {{eyeIconCon}} cursor-pointer absolute -mt-7 ml-[17rem]"></span>
+              <p class="text-red-600" *ngIf="getError('confirmPassword') !== null">
+                {{getError('confirmPassword')}}
+              </p>
+            </div>
 
           <div class="flex items-start col-span-2 !m-1">
             <div class="flex items-center h-5">
-              <input id="terms" formControlName="terms"  type="checkbox"
-                class="w-4 h-4 border border-gray-300 rounded bg-gray-50
-                 focus:ring-3 focus:ring-primary-300">
+              <input id="terms" formControlName="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50
+                             focus:ring-3 focus:ring-primary-300">
+
             </div>
             <div class="ml-3 text-sm ">
-              <label for="terms" class="font-light text-gray-500 ">
-                By signing up, you are creating a
-                Flowbite account, and you agree to Flowbite’s Terms of Use and Privacy Policy.
+              <label for="terms" class="font-light  ">
+                <span [className]="((isAgree==false) || (getError('terms')!=''))?'text-red-600':'text-gray-500'" >signing up, you are creating a
+                Flowbite account, and you agree to Flowbite’s Terms of Use and Privacy Policy.</span>
                 <a class="font-medium text-blue-700 hover:underline " routerLink="/">
                   Terms and Conditions
                 </a>
@@ -160,8 +159,3 @@ bg-center bg-no-repeat">
   </div>
 </section>
 
-<div class="bg-white">
-  <p>Form Value- {{ registerForm.value | json}}</p>
-  <p>Form Status- {{ registerForm.status | json}}</p>
-  <p>{{getClassName('password')}}</p>
-</div>
